@@ -8,4 +8,5 @@ public interface ITflMentoringRepo {
 
     boolean update(int id,String title,String Url,int repoid);
     
+    boolean delete(int id);
 }

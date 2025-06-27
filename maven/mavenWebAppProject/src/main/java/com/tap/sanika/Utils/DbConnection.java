@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DbConnection {
     
-    private String URL = "jdbc:mysql://localhost:3306/college";
+    private String URL = "jdbc:mysql://localhost:3306/tflmentoringdb";
     private String USERNAME = "root";
     private String PASSWORD = "root123";
     private Connection conn = null;

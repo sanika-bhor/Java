@@ -12,7 +12,7 @@ public class TflMentoringRepo implements ITflMentoringRepo {
             DbConnection dbconn = new DbConnection();
             Connection conn = dbconn.getConnectionDb();
             Statement smt = conn.createStatement();
-            ResultSet rs = smt.executeQuery("select * from student");
+            ResultSet rs = smt.executeQuery("select * from topics");
             ResultSetMetaData rmd = rs.getMetaData();
             int columncount = rmd.getColumnCount();
             System.out.println("Topics");
@@ -21,7 +21,7 @@ public class TflMentoringRepo implements ITflMentoringRepo {
             }
             System.out.println("\n*");
             while (rs.next()) {
-                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) );
+                System.out.println("id: "+rs.getInt(1) + ", Title: " + rs.getString(2) + ", URL: " + rs.getString(3)+",Repository id: "+rs.getInt(4));
                 System.out.println();
                 System.out.println();
             }
@@ -30,49 +30,60 @@ public class TflMentoringRepo implements ITflMentoringRepo {
         }
 
     }
-    public boolean insert(int id, String title, String Url, int repoid)
-    {
-        boolean status=false;
-        try{
+
+    public boolean insert(int id, String title, String Url, int repoid) {
+        boolean status = false;
+        try {
             DbConnection dbconn = new DbConnection();
-             Connection conn=dbconn.getConnectionDb();
-             PreparedStatement pstmt = conn.prepareStatement("insert into topics values(?,?,?,?)");
-             pstmt.setInt(1,id);
+            Connection conn = dbconn.getConnectionDb();
+            PreparedStatement pstmt = conn.prepareStatement("insert into topics values(?,?,?,?)");
+            pstmt.setInt(1, id);
             pstmt.setString(2, title);
             pstmt.setString(3, Url);
             pstmt.setInt(4, repoid);
             pstmt.executeUpdate();
-            status=true;
-            System.out.println("Data Inserted");
+            status = true;
 
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e);
         }
 
-return status;
+        return status;
     }
 
-    public boolean update(int id, String title, String Url, int repoid)
-    {
-        boolean status=false;
-        try{
+    public boolean update(int id, String title, String Url, int repoid) {
+        boolean status = false;
+        try {
             DbConnection dbconn = new DbConnection();
-            Connection conn=dbconn.getConnectionDb();
-            PreparedStatement pstmt=conn.prepareStatement("update topic set title=? url=? repoid=? where id=?");
+            Connection conn = dbconn.getConnectionDb();
+            PreparedStatement pstmt = conn.prepareStatement("update topics set title=?, url=?, repositoryid=? where id=?");
             pstmt.setString(1, title);
             pstmt.setString(2, Url);
             pstmt.setInt(3, repoid);
             pstmt.setInt(4, id);
             pstmt.executeUpdate();
-            status=true;
-            System.out.println("data updated");
-        }
-        catch(Exception e)
-        {
+            status = true;
+            
+        } catch (Exception e) {
             System.out.println(e);
         }
         return status;
+    }
+
+    public boolean delete(int id) {
+        boolean status = false;
+        try {
+        DbConnection dbconn = new DbConnection();
+        Connection conn = dbconn.getConnectionDb();
+        PreparedStatement pstmt = conn.prepareStatement("delete from topics where id=?");
+        pstmt.setInt(1, id);
+       
+            pstmt.executeUpdate();
+            status = true;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return status;
+
     }
 }
