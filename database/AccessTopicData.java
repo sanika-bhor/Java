@@ -16,17 +16,18 @@ public class AccessTopicData {
         Statement smt = connection.createStatement();
         ResultSet rs = smt.executeQuery("select * from topics");
 
-        ResultSetMetaData rmd = rs.getMetaData();
-        int columncount = rmd.getColumnCount();
-        System.out.println("Topics");
-        for (int i = 1; i <= columncount; i++) {
-            System.out.print(rmd.getColumnName(i) + "\t");
-        }
+        // ResultSetMetaData rmd = rs.getMetaData();
+        // int columncount = rmd.getColumnCount();
+        // System.out.println("Topics");
+        // for (int i = 1; i <= columncount; i++) {
+        //     System.out.print(rmd.getColumnName(i) + "\t");
+        // }
         
         
         System.out.println("\n***********************");
         while (rs.next()) {
-            System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3)+"  "+rs.getInt(4));
+            System.out.println(" { "+"id: "+rs.getInt(1) + " , SubjectId: " + rs.getString(2) + " , Question: " + rs.getString(3)+" , Option A: "+rs.getString(4)+ " , Option B: " + rs.getString(4) + " , Option A: " + rs.getString(4) + " , Option A: "
+                    + rs.getString(4));
             System.out.println();
             System.out.println();
         }
