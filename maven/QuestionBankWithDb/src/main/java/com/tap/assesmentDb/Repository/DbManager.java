@@ -41,4 +41,23 @@ public class DbManager {
             return questions;
         }
 
+    public static boolean insert(Question q) throws Exception
+    {
+        boolean status=false;
+        PreparedStatement pst=connection.prepareStatement("insert into questionbank values(?,?,?,?,?,?,?,?,?)");
+        pst.setInt(1, q.getId());
+        pst.setInt(2, q.getSubjectId());
+        pst.setString(3, q.getTitle());
+        pst.setString(4, q.getOptionA());
+        pst.setString(5, q.getOptionB());
+        pst.setString(6, q.getOptionC());
+        pst.setString(7, q.getOptionD());
+        pst.setString(8, q.getCorrectAnswer());
+        pst.setInt(9, q.getEvaluationCriteria());
+
+        pst.executeUpdate();
+        status=true;
+        return status;
+    }
+
 }

@@ -14,6 +14,7 @@ public class Question {
     private String correctAnswer;
     private int evaluationCriteria;
 
+    public Question(){}
     public Question(String title, String optionA, String optionB, String optionC, String optionD, 
             String correctAnswer,
             int evaluationCriteria, int id, int subjectId) {
