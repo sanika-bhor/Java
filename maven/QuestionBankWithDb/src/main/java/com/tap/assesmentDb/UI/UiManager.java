@@ -53,4 +53,30 @@ public class UiManager {
         int id=sc.nextInt();
         return id;
     }
+
+    public static void displayMenu()
+    {
+        System.out.println("------------MENU--------------");
+        System.out.println("1.Get All Question");
+        System.out.println("2.Insert New Question");
+        System.out.println("3.Update Existing Question");
+        System.out.println("4.Delete Existing Question");
+        System.out.println("5.Exit");
+    }
+
+    public static int getUserChoice()
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nEnter your choice");
+        int choice = sc.nextInt();
+        return choice;
+    }
+    public static void wrongChoice()
+    {
+        System.out.println("invalid choice try again!!!");
+    }
+    public static void thankyoumsg()
+    {
+        System.out.println("thank you for using our software!!!!");
+    }
 }
