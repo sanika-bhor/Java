@@ -60,4 +60,33 @@ public class DbManager {
         return status;
     }
 
+    public static boolean update(int idToBeUpdate,Question q) throws Exception {
+        boolean status = false;
+        PreparedStatement pst = connection.prepareStatement("update questionbank set subjectid=?, title=?, a=?,b=?,c=?,d=?,answerkey=?,evaluationcriteriaid=?,id=? where id=?");
+        pst.setInt(10, idToBeUpdate);
+        pst.setInt(9, q.getId());
+        pst.setInt(1, q.getSubjectId());
+        pst.setString(2, q.getTitle());
+        pst.setString(3, q.getOptionA());
+        pst.setString(4, q.getOptionB());
+        pst.setString(5, q.getOptionC());
+        pst.setString(6, q.getOptionD());
+        pst.setString(7, q.getCorrectAnswer());
+        pst.setInt(8, q.getEvaluationCriteria());
+
+        pst.executeUpdate();
+        status = true;
+        return status;
+    }
+
+    public static boolean delete(int idToBeDelete) throws Exception {
+        boolean status = false;
+        PreparedStatement pst = connection.prepareStatement(
+                "delete from questionbank where id=?");
+        pst.setInt(1, idToBeDelete);
+        pst.executeUpdate();
+        status = true;
+        return status;
+    }
+
 }

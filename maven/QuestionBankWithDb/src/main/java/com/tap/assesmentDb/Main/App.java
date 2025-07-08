@@ -10,15 +10,32 @@ import com.tap.assesmentDb.UI.UiManager;
 public class App {
     public static void main(String[] args) throws Exception {
        
-        Question question=UiManager.getInputQuestion();
-        boolean status=DbManager.insert(question);
-        if(status)
-        {
-            UiManager.successful();
-        }
-        else
-        {
-            UiManager.failed();
+        // Question question=UiManager.getInputQuestion();
+        // boolean status=DbManager.insert(question);
+        // if(status)
+        // {
+        //     UiManager.successful();
+        // }
+        // else
+        // {
+        //     UiManager.failed();
+        // }
+
+        // int id=UiManager.getInputId();
+        // Question question = UiManager.getInputQuestion();
+        // boolean status = DbManager.update(id,question);
+        // if (status) {
+        //     UiManager.successful();
+        // } else {
+        //     UiManager.failed();
+        // }
+
+        int id = UiManager.getInputId();
+        boolean status = DbManager.delete(id);
+        if (status) {
+        UiManager.successful();
+        } else {
+        UiManager.failed();
         }
 
        ArrayList<Question> questions=new ArrayList<Question>();

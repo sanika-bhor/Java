@@ -46,4 +46,11 @@ public class UiManager {
     public static void failed() {
         System.out.println("Operation  failed");
     }
+    public static int getInputId()
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter  Question id");
+        int id=sc.nextInt();
+        return id;
+    }
 }
