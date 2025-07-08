@@ -11,10 +11,11 @@ public class Question {
     private String optionB;
     private String optionC;
     private String optionD;
-    private char correctAnswer;
+    private String correctAnswer;
     private int evaluationCriteria;
 
-    public Question(String title, String optionA, String optionB, String optionC, String optionD, char correctAnswer,
+    public Question(String title, String optionA, String optionB, String optionC, String optionD, 
+            String correctAnswer,
             int evaluationCriteria, int id, int subjectId) {
         this.title = title;
         this.optionA = optionA;
@@ -84,11 +85,11 @@ public class Question {
         this.optionD = optionD;
     }
 
-    public char getCorrectAnswer() {
+    public String getCorrectAnswer() {
         return correctAnswer;
     }
 
-    public void setCorrectAnswer(char correctAnswer) {
+    public void setCorrectAnswer(String correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 
@@ -102,14 +103,14 @@ public class Question {
 
     @Override
     public String toString() {
-        return "Question{" + "title='" + title + ", id=" + id + ", optionA='" + optionA +
-                ", optionB='" + optionB +
-                ", optionC='" + optionC +
-                ", optionD='" + optionD +
+        return "\n\nQuestion{" + "title=" + title + ", id=" + id + ", optionA=" + optionA +
+                ", optionB=" + optionB +
+                ", optionC=" + optionC +
+                ", optionD=" + optionD +
                 ", correctAnswer=" + correctAnswer +
                 ", subject Id=" + subjectId +
                 ", evaluationCriteria=" + evaluationCriteria +
-                '}';
+            "}";
     }
 
 }

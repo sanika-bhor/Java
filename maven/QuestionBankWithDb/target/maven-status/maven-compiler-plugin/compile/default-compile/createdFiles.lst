@@ -1,1 +1,4 @@
+com\tap\assesmentDb\Entity\Question.class
+com\tap\assesmentDb\UI\UiManager.class
 com\tap\assesmentDb\Main\App.class
+com\tap\assesmentDb\Repository\DbManager.class
