@@ -1,0 +1,5 @@
+com\tap\patterndesign\Entity\Product.class
+com\tap\patterndesign\Main\App.class
+com\tap\patterndesign\Repository\ProductRepositoryImpl.class
+com\tap\patterndesign\Repository\ProductRepository.class
+com\tap\patterndesign\Services\ProductService.class
