@@ -1,0 +1,5 @@
+# Created at 2025-08-11T10:49:39.959
+Boot Manifest-JAR contains absolute paths in classpath 'A:\TAP\GitHub\Java\maven\asyncProgramming\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

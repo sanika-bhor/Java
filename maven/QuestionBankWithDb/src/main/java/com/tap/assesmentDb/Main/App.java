@@ -16,16 +16,16 @@ public class App {
             choice = UiManager.getUserChoice();
             switch (choice) {
                 case 1: {
-                    ArrayList<Question> questions = new ArrayList<Question>();
-                    questions = DbManager.getAll();
-                    for (Question q : questions) {
+                    ArrayList<Question> q1 = new ArrayList<Question>();
+                    q1 = DbManager.getAll().get();
+                    for (Question q : q1) {
                         System.out.println(q);
                     }
                 }
                     break;
                 case 2: {
                     Question question = UiManager.getInputQuestion();
-                    boolean status = DbManager.insert(question);
+                    boolean status = DbManager.insert(question).get();
                     if (status) {
                         UiManager.successful();
                     } else {
@@ -36,7 +36,7 @@ public class App {
                 case 3: {
                     int id = UiManager.getInputId();
                     Question question = UiManager.getInputQuestion();
-                    boolean status = DbManager.update(id, question);
+                    boolean status = DbManager.update(id, question).get();
                     if (status) {
                         UiManager.successful();
                     } else {
@@ -47,7 +47,7 @@ public class App {
 
                 case 4: {
                     int id = UiManager.getInputId();
-                    boolean status = DbManager.delete(id);
+                    boolean status = DbManager.delete(id).get();
                     if (status) {
                         UiManager.successful();
                     } else {
