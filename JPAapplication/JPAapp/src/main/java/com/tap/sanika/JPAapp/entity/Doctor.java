@@ -1,6 +1,6 @@
 package com.tap.sanika.JPAapp.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "doctors")
@@ -8,19 +8,19 @@ public class Doctor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="DoctorId")
+    @Column(name="DoctorID")
     private int id;
 
-    @Column(name = "FirstName")
+    @Column(name = "firstname")
     private String firstName;
 
-    @Column(name = "LastName")
+    @Column(name = "lastname")
     private String lastName;
     
     @Column(name = "specialty")
     private String specialization;
 
-    @Column(name = "ContactNumber")
+    @Column(name = "contactnumber")
     private String phone;
 
     public Doctor() {

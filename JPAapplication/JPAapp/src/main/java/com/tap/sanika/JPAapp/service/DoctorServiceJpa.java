@@ -6,12 +6,12 @@ import com.tap.sanika.JPAapp.entity.Doctor;
 import com.tap.sanika.JPAapp.repository.DoctorRepository;
 
 @Service
-public class DoctorServiceHbl implements DoctorService {
+public class DoctorServiceJpa implements DoctorService {
 
     private final DoctorRepository doctorRepository;
 
     // Constructor injection (we use Hibernate implementation here)
-    public DoctorServiceHbl(DoctorRepository repo) {
+    public DoctorServiceJpa(DoctorRepository repo) {
         this.doctorRepository =repo;
     }
 

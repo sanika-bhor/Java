@@ -8,7 +8,7 @@
 
         <!-- Database connection -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/healthcare_db?useSSL=false</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/health?useSSL=false</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">password</property>
 
