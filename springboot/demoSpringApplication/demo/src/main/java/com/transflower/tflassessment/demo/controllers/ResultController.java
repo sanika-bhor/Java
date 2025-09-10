@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
@@ -26,7 +27,7 @@ public class ResultController {
         return svc.getCandidateScore(candidateid, testid);
     }
 
-    @GetMapping("/candidate/teststarttime")
+    @PostMapping("/candidate/teststarttime")
     public String setCandidateTestStartTime(@RequestParam int candidateid, @RequestParam int testid) {
         Boolean status = svc.setCandidateTestStartTime(candidateid, testid, LocalDateTime.now());
         if (status) {
@@ -37,7 +38,7 @@ public class ResultController {
 
     }
 
-    @GetMapping("/candidate/testendtime")
+    @GetMapping("/candidate/testendtime/")
     public String setCandidateTestEndTime(@RequestParam int candidateid, @RequestParam int testid) {
         Boolean status = svc.setCandidateTestEndTime(candidateid, testid, LocalDateTime.now());
         if (status) {

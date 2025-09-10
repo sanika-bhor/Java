@@ -1,11 +1,13 @@
 package com.transflower.tflassessment.demo.repositories;
 
+import java.io.InputStream;
 import java.sql.*;
 
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.springframework.stereotype.Repository;
 
@@ -23,15 +25,28 @@ import com.transflower.tflassessment.demo.entities.TestScoreDto;
 @Repository
 public class ResultRepositoryImpl implements ResultRepository {
 
-    Connection connection;
-    public ResultRepositoryImpl()
+    private static Connection connection;
+    static
     {
         try
         {
-            String url="jdbc:mysql://localhost:3306/assessmentdb";
-            String userName="root";
-            String password="password";
-            connection=DriverManager.getConnection(url, userName, password);
+              Properties props = new Properties();
+        try (InputStream input = ResultRepositoryImpl.class.getClassLoader().getResourceAsStream("application.properties")) {
+            props.load(input);
+        }
+
+        String url = props.getProperty("db.url");
+        String user = props.getProperty("db.username");
+        String pass = props.getProperty("db.password");
+        String driver = props.getProperty("db.driver");
+
+        Class.forName(driver); // load driver
+        connection= DriverManager.getConnection(url, user, pass);
+
+            // String url="jdbc:mysql://localhost:3306/assessmentdb";
+            // String userName="root";
+            // String password="password";
+           
             System.out.println("Connection Established");
         }
         catch(Exception e)
