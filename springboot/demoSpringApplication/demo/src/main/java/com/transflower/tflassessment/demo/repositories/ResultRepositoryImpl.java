@@ -3,7 +3,6 @@ package com.transflower.tflassessment.demo.repositories;
 import java.io.InputStream;
 import java.sql.*;
 
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,36 +20,40 @@ import com.transflower.tflassessment.demo.entities.TestAverageReport;
 import com.transflower.tflassessment.demo.entities.TestList;
 import com.transflower.tflassessment.demo.entities.TestResultDetails;
 import com.transflower.tflassessment.demo.entities.TestScoreDto;
+import org.jasypt.util.text.AES256TextEncryptor;
 
 @Repository
 public class ResultRepositoryImpl implements ResultRepository {
 
     private static Connection connection;
-    static
-    {
-        try
-        {
-              Properties props = new Properties();
-        try (InputStream input = ResultRepositoryImpl.class.getClassLoader().getResourceAsStream("application.properties")) {
-            props.load(input);
-        }
 
-        String url = props.getProperty("db.url");
-        String user = props.getProperty("db.username");
-        String pass = props.getProperty("db.password");
-        String driver = props.getProperty("db.driver");
+    static {
+        try {
+            Properties props = new Properties();
+            try (InputStream input = ResultRepositoryImpl.class.getClassLoader()
+                    .getResourceAsStream("application.properties")) {
+                props.load(input);
+            }
 
-        Class.forName(driver); // load driver
-        connection= DriverManager.getConnection(url, user, pass);
+            String url = props.getProperty("db.url");
+            String user = props.getProperty("db.username");
+            String encPass = props.getProperty("db.password"); // this
+                                                               // will
+                                                               // be
+                                                               // ENC(...)
 
-            // String url="jdbc:mysql://localhost:3306/assessmentdb";
-            // String userName="root";
-            // String password="password";
-           
+            // decrypt manually
+            AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
+            textEncryptor.setPassword("sanika"); // your secret key
+            String pass = textEncryptor.decrypt(encPass.replace("ENC(", "").replace(")", ""));
+
+            String driver = props.getProperty("db.driver");
+
+            Class.forName(driver);
+            connection = DriverManager.getConnection(url, user, pass);
+
             System.out.println("Connection Established");
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e);
             System.out.println("Error in connecting to database");
         }
@@ -58,46 +61,40 @@ public class ResultRepositoryImpl implements ResultRepository {
 
     @Override
     public int getCandidateScore(int candidateId, int testId) {
-        try{
-        CallableStatement callableStatement = connection.prepareCall("{call spcandidatetestresult(?,?,?)}");
-        callableStatement.setInt(1, candidateId);
-        callableStatement.setInt(2, testId);
-        callableStatement.registerOutParameter(3, java.sql.Types.INTEGER);
+        try {
+            CallableStatement callableStatement = connection.prepareCall("{call spcandidatetestresult(?,?,?)}");
+            callableStatement.setInt(1, candidateId);
+            callableStatement.setInt(2, testId);
+            callableStatement.registerOutParameter(3, java.sql.Types.INTEGER);
 
-        callableStatement.execute();
-        int score = callableStatement.getInt(3);
-        return score;
-        }
-        catch(Exception e)
-        {
+            callableStatement.execute();
+            int score = callableStatement.getInt(3);
+            return score;
+        } catch (Exception e) {
             System.out.println(e);
             System.out.println("Error in getting candidate score");
         }
         return -1;
     }
-        
 
     @Override
     public boolean setCandidateTestStartTime(int candidateId, int testId, LocalDateTime time) {
-       boolean status=false;
-       String query= "insert into candidatetestresults(testid,teststarttime,candidateid) values (?,?,?)";
-       try{
-            PreparedStatement preparedStatement=connection.prepareStatement(query);
+        boolean status = false;
+        String query = "insert into candidatetestresults(testid,teststarttime,candidateid) values (?,?,?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, testId);
             preparedStatement.setTimestamp(2, Timestamp.valueOf(time));
             preparedStatement.setInt(3, candidateId);
 
-            int rowsAffected=preparedStatement.executeUpdate();
-            if(rowsAffected>0)
-            {
-                status=true;
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                status = true;
             }
-        
-       }
-       catch(Exception e)
-       {
-        System.out.println(e);
-       }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         return status;
     }
@@ -122,33 +119,31 @@ public class ResultRepositoryImpl implements ResultRepository {
         }
 
         return status;
-     }
+    }
 
     @Override
     public CandidateResultDetails candidateTestResultDetails(int candidateId, int testId) {
-       CandidateResultDetails candidateResultDetails=new CandidateResultDetails();
-        try
-        {
-            CallableStatement callableStatement=connection.prepareCall("{call spcandidatetestresultdetails(?,?,?,?,?)}");
-            callableStatement.setInt(1,candidateId);
-            callableStatement.setInt(2,testId);
-            callableStatement.registerOutParameter(3,java.sql.Types.INTEGER);
-            callableStatement.registerOutParameter(4,java.sql.Types.INTEGER);
-            callableStatement.registerOutParameter(5,java.sql.Types.INTEGER);
+        CandidateResultDetails candidateResultDetails = new CandidateResultDetails();
+        try {
+            CallableStatement callableStatement = connection
+                    .prepareCall("{call spcandidatetestresultdetails(?,?,?,?,?)}");
+            callableStatement.setInt(1, candidateId);
+            callableStatement.setInt(2, testId);
+            callableStatement.registerOutParameter(3, java.sql.Types.INTEGER);
+            callableStatement.registerOutParameter(4, java.sql.Types.INTEGER);
+            callableStatement.registerOutParameter(5, java.sql.Types.INTEGER);
 
             callableStatement.execute();
-            int correctAnswer=callableStatement.getInt(3);
-            int incorrectAnswer=callableStatement.getInt(4);
-            int skippedQuestions=callableStatement.getInt(5);
-            
+            int correctAnswer = callableStatement.getInt(3);
+            int incorrectAnswer = callableStatement.getInt(4);
+            int skippedQuestions = callableStatement.getInt(5);
+
             candidateResultDetails.setCorrectAnswer(correctAnswer);
             candidateResultDetails.setIncorrectAnswer(incorrectAnswer);
             candidateResultDetails.setSkippedQuestions(skippedQuestions);
             candidateResultDetails.setCandidateId(candidateId);
             candidateResultDetails.setTestId(testId);
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e);
         }
         return candidateResultDetails;
@@ -156,29 +151,27 @@ public class ResultRepositoryImpl implements ResultRepository {
 
     @Override
     public List<TestResultDetails> getTestResultDetail(int testId) {
-       List<TestResultDetails> resultDetails=new ArrayList<TestResultDetails>();
+        List<TestResultDetails> resultDetails = new ArrayList<TestResultDetails>();
         String query = "SELECT "
-                       +"candidatetestresults.testid," 
-                       +" candidatetestresults.score, "
-                        +"candidatetestresults.candidateid,"
-                       +" employees.firstname, "
-                        +"employees.lastname, "
-                        +"subjects.title AS subject, "
-                        +"tests.name AS testname "
-                       +" FROM candidatetestresults "
-                        +"INNER JOIN employees ON employees.id = candidatetestresults.candidateid "
-                        +"INNER JOIN tests ON candidatetestresults.testid = tests.id "
-                      +"  INNER JOIN subjects ON tests.subjectid = subjects.id "
-                      +"  WHERE candidatetestresults.testid=?";
+                + "candidatetestresults.testid,"
+                + " candidatetestresults.score, "
+                + "candidatetestresults.candidateid,"
+                + " employees.firstname, "
+                + "employees.lastname, "
+                + "subjects.title AS subject, "
+                + "tests.name AS testname "
+                + " FROM candidatetestresults "
+                + "INNER JOIN employees ON employees.id = candidatetestresults.candidateid "
+                + "INNER JOIN tests ON candidatetestresults.testid = tests.id "
+                + "  INNER JOIN subjects ON tests.subjectid = subjects.id "
+                + "  WHERE candidatetestresults.testid=?";
 
-        try
-        { 
-            PreparedStatement preparedStatement=connection.prepareStatement(query);
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, testId);
-            ResultSet resultSet=preparedStatement.executeQuery();
-            while(resultSet.next())
-            {
-                TestResultDetails testResultDetail=new TestResultDetails();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                TestResultDetails testResultDetail = new TestResultDetails();
                 testResultDetail.setTestId(testId);
                 testResultDetail.setTestName(resultSet.getString("testname"));
                 testResultDetail.setCandidateId(resultSet.getInt("candidateid"));
@@ -188,20 +181,10 @@ public class ResultRepositoryImpl implements ResultRepository {
                 testResultDetail.setScore(resultSet.getInt("score"));
                 resultDetails.add(testResultDetail);
             }
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e);
         }
         return resultDetails;
     }
 
-    
 }
-
-
-
-
-
- 
-
