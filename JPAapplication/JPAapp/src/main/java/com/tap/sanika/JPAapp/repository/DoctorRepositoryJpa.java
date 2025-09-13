@@ -35,7 +35,7 @@ public class DoctorRepositoryJpa implements DoctorRepository {
         try {
             Doctor doctor = entityManager.find(Doctor.class, id);
             if (doctor != null) {
-                doctor.setPhone(newPhone); // merge not needed
+                doctor.setPhone(newPhone); 
                 return true;
             }
             return false;
