@@ -1,0 +1,59 @@
+//java compile
+javac filename.java
+
+//java run
+java filename
+
+//maven commands
+
+//maven version
+1. mvn -version
+
+//create maven basic project
+2. mvn archetype:generate -DgroupId=com.tap.sanika.demo -DartifactId=mavenWebAppProject -DartitypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+//creating .jar file 
+3.mvn package 
+
+//clean, compile and run java code
+4.mvn clean compile exec:java
+
+	//for this we use plugin
+	<plugin>
+		<groupId>org.codehaus.mojo</groupId>
+		<artifactId>exec-maven-plugin</artifactId>
+		<version>3.1.0</version>
+		<configuration>
+			<mainClass>com.transflower.App</mainClass>
+		</configuration>
+	</plugin>
+
+
+
+
+//create maven servlet project
+mvn archetype:generate -DgroupId=com.example -DartifactId=my-servlet-app -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+//maven springboot api project
+spring initializer website
+
+//to run the springboot api project:
+mvn clean
+mvn package
+mvn spring-boot:run
+
+
+// for encypting password
+mvn jasypt:encrypt-value -Djasypt.encryptor.password=MY_SECRET_KEY -Djasypt.plugin.value=password
+
+// for run spring application having encypting password
+mvn spring-boot:run -Djasypt.encryptor.password=MY_SECRET_KEY
+
+
+//for create test project
+mvn archetype:generate -DgroupId=com.transflower -DartifactId=selenium-junit-maven  -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+//for run test
+mvn test
+
+
