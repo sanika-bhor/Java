@@ -36,8 +36,8 @@ public class RegisterTest {
         WebElement password=webDriver.findElement(By.id("password"));
         WebElement confirmPassword=webDriver.findElement(By.id("confirmPassword"));
 
-        WebElement genderMale=webDriver.findElement(By.cssSelector("input[value='male']"));
-        WebElement genderFemale=webDriver.findElement(By.cssSelector("input[value='female']"));
+        WebElement genderMale=webDriver.findElement(By.id("male"));
+        WebElement genderFemale=webDriver.findElement(By.id("female"));
 
         WebElement readingCheckbox = webDriver.findElement(By.cssSelector("input[value='reading']"));
         WebElement sportsCheckbox = webDriver.findElement(By.cssSelector("input[value='sports']"));
