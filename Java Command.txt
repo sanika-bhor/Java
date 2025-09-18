@@ -57,6 +57,3 @@ mvn archetype:generate -DgroupId=com.transflower -DartifactId=selenium-junit-mav
 mvn test
 
 
-
-
-
