@@ -5,6 +5,7 @@
     <classes>
       <class name="com.transflower.LoginTest">
         <methods>
+          <include name="testLoginPageTitle"/>
           <include name="teardown"/>
           <include name="setup"/>
           <include name="testLoginButtonExists"/>

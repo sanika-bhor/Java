@@ -50,8 +50,11 @@ public class LoginTest {
             wait.until(ExpectedConditions.urlToBe("http://127.0.0.1:5500/index.html"));
 
         }
+        
         String currentUrl = driver.getCurrentUrl();
         Assert.assertEquals(currentUrl, "http://127.0.0.1:5500/index.html", "Page did not redirect to the expected URL.");
+    
+
     }
 
     @AfterClass
