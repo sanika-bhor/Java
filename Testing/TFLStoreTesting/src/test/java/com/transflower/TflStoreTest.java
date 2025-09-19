@@ -32,6 +32,20 @@ public class TflStoreTest {
 
         String currentLink = driver.getCurrentUrl();
         assertTrue(currentLink.contains("catalog.html"));
+
+
+        WebElement flower = driver.findElement(By.id("1"));
+        flower.click();
+        Thread.sleep(2000);
+        currentLink = driver.getCurrentUrl();
+        assertTrue(currentLink.contains("details.html"));
+
+
+        WebElement addToCartButton = driver.findElement(By.id("click"));
+        addToCartButton.click();
+        Thread.sleep(2000);
+        currentLink = driver.getCurrentUrl();
+        assertTrue(currentLink.contains("cart.html"));
     }
 
     @AfterAll
