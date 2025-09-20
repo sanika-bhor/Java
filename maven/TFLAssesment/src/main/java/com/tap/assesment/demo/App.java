@@ -6,12 +6,12 @@ import java.util.Scanner;
 
 import com.tap.assesment.Entity.Question;
 import com.tap.assesment.FileManager.FileIOManager;
-import com.tap.assesment.Repository.QuestionBank;
+import com.tap.assesment.Repository.QuestionBankRepositoryImpl;
 import com.tap.assesment.ui.UIManager;
 
 public class App {
     public static void main(String[] args) {
-        QuestionBank questionBank = new QuestionBank();
+        QuestionBankRepositoryImpl questionBank = new QuestionBankRepositoryImpl();
         FileIOManager fileIOManager=new FileIOManager();
         Scanner scanner = new Scanner(System.in);
         boolean running = true;

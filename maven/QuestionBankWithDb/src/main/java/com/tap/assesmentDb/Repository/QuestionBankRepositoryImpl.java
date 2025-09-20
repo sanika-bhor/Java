@@ -6,7 +6,7 @@ import java.util.concurrent.CompletableFuture;
 
 import com.tap.assesmentDb.Entity.Question;
 
-public class DbManager {
+public class QuestionBankRepositoryImpl implements QuestionBankRepository {
 
     public static Connection connection;
 
@@ -22,7 +22,8 @@ public class DbManager {
         }
     };
 
-    public static CompletableFuture<ArrayList<Question>> getAll() throws SQLException {
+    @Override
+    public  CompletableFuture<ArrayList<Question>> getAll() {
         return CompletableFuture.supplyAsync(() -> {
             ArrayList<Question> questions = new ArrayList<Question>();
 
@@ -47,7 +48,8 @@ public class DbManager {
 
     }
 
-    public static CompletableFuture<Boolean> insert(Question q)  {
+    @Override
+    public  CompletableFuture<Boolean> insert(Question q)  {
         return CompletableFuture.supplyAsync(()->{
             boolean status = false;
             try {
@@ -72,8 +74,8 @@ public class DbManager {
             return status;
         });
     }
-
-    public static CompletableFuture<Boolean> update(int id, Question q) throws Exception {
+    @Override
+    public  CompletableFuture<Boolean> update(int id, Question q)  {
         return CompletableFuture.supplyAsync(()->{
         boolean status = false;
         try{
@@ -101,7 +103,8 @@ public class DbManager {
         });
     }
 
-    public static CompletableFuture<Boolean> delete(int idToBeDelete) throws Exception {
+    @Override
+    public  CompletableFuture<Boolean> delete(int idToBeDelete)  {
         return CompletableFuture.supplyAsync(()->{
         boolean status = false;
         try{

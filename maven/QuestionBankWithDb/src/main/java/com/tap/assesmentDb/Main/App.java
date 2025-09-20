@@ -4,11 +4,18 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import com.tap.assesmentDb.Entity.Question;
-import com.tap.assesmentDb.Repository.DbManager;
+import com.tap.assesmentDb.Repository.QuestionBankRepository;
+import com.tap.assesmentDb.Repository.QuestionBankRepositoryImpl;
+import com.tap.assesmentDb.Services.QuestionBankService;
+import com.tap.assesmentDb.Services.QuestionBankServiceImpl;
 import com.tap.assesmentDb.UI.UiManager;
 
 public class App {
     public static void main(String[] args) throws Exception {
+
+        QuestionBankRepository questionBankRepository = new QuestionBankRepositoryImpl();
+        QuestionBankService questionBankService = new QuestionBankServiceImpl(questionBankRepository);
+
 
         int choice = 0;
         do {
@@ -17,7 +24,7 @@ public class App {
             switch (choice) {
                 case 1: {
                     ArrayList<Question> q1 = new ArrayList<Question>();
-                    q1 = DbManager.getAll().get();
+                    q1 = questionBankService.getAll().get();
                     for (Question q : q1) {
                         System.out.println(q);
                     }
@@ -25,7 +32,7 @@ public class App {
                     break;
                 case 2: {
                     Question question = UiManager.getInputQuestion();
-                    boolean status = DbManager.insert(question).get();
+                    boolean status = questionBankService.insert(question).get();
                     if (status) {
                         UiManager.successful();
                     } else {
@@ -36,7 +43,7 @@ public class App {
                 case 3: {
                     int id = UiManager.getInputId();
                     Question question = UiManager.getInputQuestion();
-                    boolean status = DbManager.update(id, question).get();
+                    boolean status = questionBankService.update(id, question).get();
                     if (status) {
                         UiManager.successful();
                     } else {
@@ -47,7 +54,7 @@ public class App {
 
                 case 4: {
                     int id = UiManager.getInputId();
-                    boolean status = DbManager.delete(id).get();
+                    boolean status = questionBankService.delete(id).get();
                     if (status) {
                         UiManager.successful();
                     } else {

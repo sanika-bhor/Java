@@ -46,6 +46,8 @@ public class TflStoreTest {
         Thread.sleep(2000);
         currentLink = driver.getCurrentUrl();
         assertTrue(currentLink.contains("cart.html"));
+
+        
     }
 
     @AfterAll

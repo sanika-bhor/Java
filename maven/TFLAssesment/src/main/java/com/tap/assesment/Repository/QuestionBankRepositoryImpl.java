@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import com.tap.assesment.Entity.Question;
 
-public class QuestionBank {
+public class QuestionBankRepositoryImpl implements QuestionBankRepository {
 
     private ArrayList<Question> questions = new ArrayList<Question>();
 
-    public QuestionBank() {
+    public QuestionBankRepositoryImpl() {
         // Constructor to initialize the question bank
         // This could load questions from a database or other source
     }
