@@ -47,6 +47,19 @@ public class TflStoreTest {
         currentLink = driver.getCurrentUrl();
         assertTrue(currentLink.contains("cart.html"));
 
+
+        WebElement pid=driver.findElement(By.id("txtid"));
+        pid.clear();
+        pid.sendKeys("1");
+        WebElement qty=driver.findElement(By.id("txtquantity"));
+        qty.clear();
+        qty.sendKeys("2");
+        WebElement updateButton = driver.findElement(By.id("addtocart"));
+        updateButton.click();
+        Thread.sleep(2000);
+        currentLink = driver.getCurrentUrl();
+        assertTrue(currentLink.contains("cart.html"));
+
         
     }
 
