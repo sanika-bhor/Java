@@ -3,13 +3,13 @@
 
     <test name="API Tests">
         <classes>
-            <class name="com.tap.example.RestAPITesting.tests.ProductApiTest"/>
+            <class name="com.tap.example.RestAPITesting.ProductApiTest"/>
         </classes>
     </test>
 
     <test name="UI Tests">
         <classes>
-            <class name="com.tap.example.RestAPITesting.tests.ProductUITest"/>
+            <class name="com.tap.example.RestAPITesting.ProductUITest"/>
         </classes>
     </test>
 
