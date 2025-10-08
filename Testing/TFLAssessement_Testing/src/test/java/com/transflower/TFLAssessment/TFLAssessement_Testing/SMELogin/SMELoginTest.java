@@ -1,4 +1,4 @@
-package com.transflower.TFLAssessment.TFLAssessement_Testing.SME;
+package com.transflower.TFLAssessment.TFLAssessement_Testing.SMELogin;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

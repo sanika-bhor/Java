@@ -53,8 +53,8 @@ public class StudentLoginTest
 
         Assert.assertTrue(driver.getCurrentUrl().contains("/Student/student.html#"));
 
-        WebElement details=driver.findElement(By.className("detailsBtn"));
-        details.click();
+        WebElement detailsButton = driver.findElement(By.xpath("//button[contains(@data-test, '5')]"));
+        detailsButton.click();
 
         Assert.assertTrue(driver.getCurrentUrl().contains("/Student/student.html#"));
 
