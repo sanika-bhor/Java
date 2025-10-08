@@ -111,6 +111,24 @@ public class AdminLoginTest {
 
        js.executeScript("document.getElementById('scheduledEnd').value='2025-10-10T18:50';");
 
+       WebElement remarks=driver.findElement(By.id("remarks"));
+       remarks.sendKeys("Please attend test");
+
+       WebElement addStudent=driver.findElement(By.id("addStudent"));
+       addStudent.click();
+
+       try {
+           Thread.sleep(1000);
+       } catch (Exception e) {
+           System.out.println(e);
+       }
+
+       Alert newAlert=driver.switchTo().alert();
+       newAlert.accept();
+
+       Assert.assertTrue(driver.getCurrentUrl().contains("/Admin/admin.html"));
+
+
 
     }
 }

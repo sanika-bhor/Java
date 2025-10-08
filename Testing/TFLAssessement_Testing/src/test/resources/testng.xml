@@ -1,11 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="TFLAssessmentTestSuiteSuite" verbose="1">
 
-    <!-- <test name="SME Tests">
+    <test name="SME Tests">
         <classes>
             <class name="com.transflower.TFLAssessment.TFLAssessement_Testing.SMELogin.SMELoginTest"/>
         </classes>
-    </test> -->
+    </test>
 
     <test name="Admin Tests">
     <classes>
@@ -13,10 +13,10 @@
     </classes>
     </test>
 
-    <!-- <test name="Student Tests">
+    <test name="Student Tests">
         <classes>
             <class name="com.transflower.TFLAssessment.TFLAssessement_Testing.StudentLogin.StudentLoginTest"/>
         </classes>
-    </test> -->
+    </test>
 
 </suite>

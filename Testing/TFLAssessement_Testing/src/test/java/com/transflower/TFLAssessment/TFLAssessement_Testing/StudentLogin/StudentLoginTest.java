@@ -53,13 +53,24 @@ public class StudentLoginTest
 
         Assert.assertTrue(driver.getCurrentUrl().contains("/Student/student.html#"));
 
-        WebElement detailsButton = driver.findElement(By.xpath("//button[contains(@data-test, '5')]"));
+        WebElement detailsButton = driver.findElement(By.xpath("//button[contains(@data-test, '\"id\":9')]"));
         detailsButton.click();
-
+       
         Assert.assertTrue(driver.getCurrentUrl().contains("/Student/student.html#"));
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+     
 
-        WebElement startTest=driver.findElement(By.className("startBtn"));
+        WebElement startTest=driver.findElement(By.xpath("//button[contains(@data-id,'9')]"));
         startTest.click();
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         
     }
 
