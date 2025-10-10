@@ -13,26 +13,27 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class SMELoginTest {
-    
-    WebDriver driver;
-    @BeforeClass
-    public void setup()
-    {
-        WebDriverManager.chromedriver().setup();
-        driver=new ChromeDriver();
-    }
-    @Test
-    public void SMELogin()
-    {
-         driver.get("http://localhost:5501/home.html");
 
-        WebElement loginClick=driver.findElement(By.className("login-link"));
+    WebDriver driver;
+
+    @BeforeClass
+    public void setup() {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+    }
+
+    @Test
+    public void SMELogin() {
+        driver.get("http://localhost:5501/home.html");
+
+        WebElement loginClick = driver.findElement(By.className("login-link"));
         loginClick.click();
         Assert.assertTrue(driver.getCurrentUrl().contains("/loginJWT.html"));
 
@@ -44,22 +45,22 @@ public class SMELoginTest {
 
         WebElement loginButton = driver.findElement(By.cssSelector("button[type=submit]"));
         loginButton.click();
-         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlContains("/SME/sme.html"));
 
         Assert.assertTrue(driver.getCurrentUrl().contains("/SME/sme.html"));
 
-        WebElement createTest=driver.findElement(By.id("createTestLink"));
+        WebElement createTest = driver.findElement(By.id("createTestLink"));
         createTest.click();
         Assert.assertTrue(driver.getCurrentUrl().contains("/SME/sme.html"));
 
-        WebElement testName=driver.findElement(By.id("testName"));
+        WebElement testName = driver.findElement(By.id("testName"));
         testName.sendKeys("New Java Test");
 
-        WebElement duration=driver.findElement(By.id("duration"));
+        WebElement duration = driver.findElement(By.id("duration"));
         duration.sendKeys("00:30:00");
-       
-        Select subject=new Select(driver.findElement(By.id("subjectSelect")));
+
+        Select subject = new Select(driver.findElement(By.id("subjectSelect")));
         subject.selectByValue("1");
         try {
             Thread.sleep(1000);
@@ -67,12 +68,12 @@ public class SMELoginTest {
             System.out.println(e);
         }
 
-        Select smeselect=new Select(driver.findElement(By.id("smeSelect")));
+        Select smeselect = new Select(driver.findElement(By.id("smeSelect")));
         smeselect.selectByValue("1");
-       
 
         // LocalDateTime dateTime = LocalDateTime.of(2025, 10, 7, 18, 1);
-        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        // DateTimeFormatter formatter =
+        // DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         // String formattedDateTime = dateTime.format(formatter);
 
         // WebElement scheduleTime=driver.findElement(By.id("scheduledDate"));
@@ -81,15 +82,14 @@ public class SMELoginTest {
         // scheduleTime.sendKeys("2025-10-07T18:38");
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-       js.executeScript("document.getElementById('scheduledDate').value = '2025-10-07T18:50';");
+        js.executeScript("document.getElementById('scheduledDate').value = '2025-10-07T18:50';");
 
-
-        WebElement passingLevel=driver.findElement(By.id("passingLevel"));
+        WebElement passingLevel = driver.findElement(By.id("passingLevel"));
         passingLevel.sendKeys("10");
 
-        WebElement ques1=driver.findElement(By.cssSelector("input[value='1']"));
+        WebElement ques1 = driver.findElement(By.cssSelector("input[value='1']"));
         ques1.click();
-       
+
         WebElement ques2 = driver.findElement(By.cssSelector("input[value='2']"));
         ques2.click();
 
@@ -105,7 +105,7 @@ public class SMELoginTest {
         WebElement ques6 = driver.findElement(By.cssSelector("input[value='40']"));
         ques6.click();
 
-        WebElement createTestButton =driver.findElement(By.id("submitBtn"));
+        WebElement createTestButton = driver.findElement(By.id("submitBtn"));
         createTestButton.click();
 
         try {
@@ -116,7 +116,7 @@ public class SMELoginTest {
 
         Assert.assertTrue(driver.getCurrentUrl().contains("/SME/reviewtest.html"));
 
-        WebElement confirmButton=driver.findElement(By.id("confirmBtn"));
+        WebElement confirmButton = driver.findElement(By.id("confirmBtn"));
         confirmButton.click();
 
         try {
@@ -128,4 +128,12 @@ public class SMELoginTest {
 
         Assert.assertTrue(driver.getCurrentUrl().contains("/SME/sme.html?msg=Test%20Created%20Successfully"));
     }
+
+    @AfterClass
+    public void teardown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+
 }

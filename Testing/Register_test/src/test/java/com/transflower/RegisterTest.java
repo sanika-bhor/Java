@@ -64,7 +64,8 @@ public class RegisterTest {
         terms.click();
 
         dob.clear();
-        dob.sendKeys("04-27-2005");
+        dob.sendKeys("04-27-2005 ");
+
 
       
         btn.click();

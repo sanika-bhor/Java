@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -34,18 +35,17 @@ public class AdminLoginTest {
         loginClick.click();
         Assert.assertTrue(driver.getCurrentUrl().contains("/loginJWT.html"));
 
+
         WebElement email = driver.findElement(By.id("email"));
-        email.sendKeys("ravi.tambade@example.com");
-
         WebElement password = driver.findElement(By.id("password"));
+        email.sendKeys("ravi.tambade@example.com");
         password.sendKeys("12345");
-
         WebElement loginButton = driver.findElement(By.cssSelector("button[type=submit]"));
         loginButton.click();
 
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlContains("/Admin/admin.html"));
-
         Assert.assertTrue(driver.getCurrentUrl().contains("/Admin/admin.html"));
 
         WebElement assignTest = driver.findElement(By.id("showTestBtw"));
@@ -57,9 +57,8 @@ public class AdminLoginTest {
         }
 
         WebElement fromdate = driver.findElement(By.id("fromDate"));
-        fromdate.sendKeys("10/7/2025");
-
         WebElement todate = driver.findElement(By.id("toDate"));
+        fromdate.sendKeys("10/7/2025");
         todate.sendKeys("10/9/2025");
 
         WebElement getTestButton = driver.findElement(By.xpath("//button[text()='Get Tests']"));
@@ -108,7 +107,6 @@ public class AdminLoginTest {
 
        JavascriptExecutor js=(JavascriptExecutor) driver;
        js.executeScript("document.getElementById('scheduledStart').value= '2025-10-07T18:50';");
-
        js.executeScript("document.getElementById('scheduledEnd').value='2025-10-10T18:50';");
 
        WebElement remarks=driver.findElement(By.id("remarks"));
@@ -125,10 +123,14 @@ public class AdminLoginTest {
 
        Alert newAlert=driver.switchTo().alert();
        newAlert.accept();
-
        Assert.assertTrue(driver.getCurrentUrl().contains("/Admin/admin.html"));
-
-
-
     }
+
+    @AfterClass
+      public void teardown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+
 }
