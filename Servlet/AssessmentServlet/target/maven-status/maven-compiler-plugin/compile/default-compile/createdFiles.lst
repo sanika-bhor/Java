@@ -1,6 +1,9 @@
 com\tap\tflassessment\servlet\Services\SubjectService.class
 com\tap\tflassessment\servlet\Repositories\SubjectRepositoryImpl$1.class
+com\tap\tflassessment\servlet\Servlets\SubjectServlets.class
 com\tap\tflassessment\servlet\Services\SubjectServiceImpl.class
 com\tap\tflassessment\servlet\Repositories\SubjectRepository.class
+com\tap\tflassessment\servlet\filter\CorsFilter.class
 com\tap\tflassessment\servlet\Repositories\SubjectRepositoryImpl.class
+com\tap\tflassessment\servlet\IOC\IOCContainer.class
 com\tap\tflassessment\servlet\Entities\SubjectModel.class

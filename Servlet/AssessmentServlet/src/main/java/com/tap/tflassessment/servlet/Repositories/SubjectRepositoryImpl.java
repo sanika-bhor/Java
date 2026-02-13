@@ -14,27 +14,32 @@ import jakarta.servlet.ServletContext;
 
 public class SubjectRepositoryImpl implements SubjectRepository {
 
-    @Override
-    public List<SubjectModel> getAllSubjects() {
-        List<SubjectModel> subjects = new ArrayList<>();
-        try {
 
-            ObjectMapper mapper = new ObjectMapper();
+    private ObjectMapper mapper=new ObjectMapper();
 
-            InputStream is = getClass()
-                    .getClassLoader()
-                    .getResourceAsStream("data/subjects.json");
+    public SubjectRepositoryImpl(){}
+    // public int serialize(SubjectModel subject){
+    //     try{
+    //        mapper.writeValue(new File("/src/main/resources/subject.json"), subject);
+    //     }catch(Exception e){
+    //         e.printStackTrace();
+    //     }
+    //     return 1;
+    // }
 
-            subjects = mapper.readValue(is, new TypeReference<List<SubjectModel>>() {
-            
-            });
-
-
-        } catch (Exception e) {
-            System.out.println(e);
+    public List<SubjectModel> getAllSubjects(){
+        List<SubjectModel> subjectList=new ArrayList<>();
+        try{
+            InputStream input = getClass().getClassLoader().getResourceAsStream("data/subjects.json");
+            subjectList = mapper.readValue(input,new TypeReference<List<SubjectModel>>() {});
+        }catch(Exception e){
+            e.printStackTrace();
         }
-        return subjects;
+        return subjectList;
     }
+
+
+
 
     @Override
     public int addSubject(SubjectModel subject) {
