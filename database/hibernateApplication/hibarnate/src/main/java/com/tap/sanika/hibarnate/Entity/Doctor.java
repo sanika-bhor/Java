@@ -32,7 +32,6 @@ public class Doctor {
         this.specialization = specialization;
         this.phone = phone;
     }
-
     // Getters & setters
     public int getId() {
         return id;
